@@ -1,0 +1,89 @@
+doctype html
+//- basic libraries: jquery(1.10.2), d3js(3.5.4), angularjs(1.3.15), bootstrap(3.0/4.0)/semantic-ui(0.9.3/0.9.5)
+//-                  fontawesome(4.4.0), reactjs(0.14.0)
+- var use = { cdn: false, og: false, favicon: true, appleicon: true }
+- var lib = { jquery: true, d3js: false, angular: true, bootstrap: true, semantic: false, fontawesome: true, reactjs: false, revealjs: false, ionrangeslider: false, ldcolorpicker: false }
+- var assets = "assets"
+- var favicon = "thumbnail.png"
+- var title = "template"
+- var og = {}
+- og.title = title
+- og.twitter = {type: "summary_large_image", site: "@zbryikt", creator: "@zbryikt"}
+- og.domain = "zbryikt.github.io"
+- og.url = ""
+- og.thumbnail = {width: 200, height: 200, type: "image/png"}
+- og.thumbnail.url = "thumbnail.png"
+- og.author = "zbryikt"
+- og.section = "Taiwan"
+- og.keyword = "zbryikt,template"
+- og.description = ""
+- var fb = {}
+- fb.app_id = ""
+- fb.admins = ""
+html(lang="en")
+  head(prefix="og: http://ogp.me/ns#")
+    meta(charset="utf-8")
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title
+    // libraries
+    include library.pug
+    // custom files
+    link(rel="stylesheet",type="text/css",href="index.css")
+    script(type="text/javascript",src="index.js")
+    script(src='https://www.google.com/recaptcha/api.js?render=6Lf1-YAUAAAAAA59G0nEp5EnCw4NOhv_k94Wf7vn')
+
+  body
+    mixin comment(name, reply, time, avatar, indent, up, down)
+      .media.comment(class=(indent?"indent":""),style="margin-left: " + (indent * 58) + "px")
+        img.avatar(src=avatar)
+        .media-body
+          .title
+            .name Kirby Wu
+            if reply
+              .reply #[i.fa.fa-share] tkirby
+            .time a year ago
+          .content
+            block
+          .action
+            .btn
+              i.fa.fa-chevron-up
+              span #{up}
+            .btn
+              i.fa.fa-chevron-down
+              span #{down}
+            .btn Reply
+
+
+
+    .lddq
+      .head
+        .btn.title 15 Comments
+      .media
+        img.avatar(src="img/K02.gif")
+        .media-body
+          textarea.form-control(placeholder="Join the discussion...")
+      +comment("Johnny G", "", "a year agao", "img/K02.gif", 0, 5, 1)
+        | Greatest properly off ham exercise all. Unsatiable invitation its possession nor off. All difficulty estimating unreserved increasing the solicitude. Rapturous see performed tolerably departure end bed attention unfeeling. On unpleasing principles alteration of. Be at performed preferred determine collected. Him nay acuteness discourse lis
+        br
+        img(src="img/19_flirt.gif")
+      each i in [1,2,3,4,5]
+        +comment("Kirby Wu", "", "now", "img/K02.gif", 1)
+          | Far curiosity incommode now led smallness allowance. Favour bed assure son things yet. She consisted consulted elsewhere happiness disposing household any old the.
+          br
+          | Widow downs you new shade drift hopes small. So otherwise commanded sweetness we improving. Instantly by daughters resembled unwilling principle so middleton. F
+
+      .recommend
+        .head ALSO ON #[b LOADING.IO]
+        .content
+          +comment("Michael Bolton", "", "a month ago", "img/K02.gif", 0)
+            | On recommend tolerably my belonging or am.
+          +comment("Sasuke", "", "a month ago", "img/K02.gif", 0)
+            | Woody equal ask saw sir weeks aware decay. Entrance prospect removing we packages strictly is no smallest he. For hop
+script.
+  grecaptcha.ready(function() {
+    grecaptcha.execute('6Lf1-YAUAAAAAA59G0nEp5EnCw4NOhv_k94Wf7vn', {action: 'action_name'})
+    .then(function(token) {
+      console.log(token);
+      // Verify the token on the server.
+    });
+  });
